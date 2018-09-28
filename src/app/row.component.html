@@ -1,0 +1,70 @@
+<td>
+  <div class="ui input" style="width: 100%">
+    <input type="text" [(ngModel)]="field.name">
+  </div>
+</td>
+<td>
+  <div class="ui checkbox">
+    <input type="checkbox" name="required" [(ngModel)]="field.required">
+    <label></label>
+  </div>
+</td>
+
+<td>
+  <button class="ui button positive" (click)="add_rule()">Add rule</button>
+  <table class="ui very compact basic table">
+    <thead>
+<th>Name</th>
+<th>Arguments</th>
+<th></th>
+</thead>
+<tbody>
+  <tr *ngFor="let rule of field.rules; let i = index;">
+    <td>
+      <div class="field">
+        <select class="ui fluid dropdown" [(ngModel)]="rule.name" (change)="select_rule($event.target.value, i)">
+          <option value="">Select a rule</option>
+          <option *ngFor="let r of rules" [value]="r.name">{{r.name}}</option>
+        </select>
+      </div>
+    </td>
+    <td>
+      <div class="ui input" *ngFor="let item of rule.arguments | keyvalue" style="margin-left: 10px;">
+        <input type="text" [(ngModel)]="rule.arguments[item.key]" [placeholder]="item.key">
+      </div>
+    </td>
+    <td class="right aligned">
+      <button class="ui icon negative button" (click)="delete_rule('Are you sure to delete this rule?', i)">
+        <i class="trash icon"></i>
+      </button>
+    </td>
+  </tr>
+</tbody>
+</table>
+</td>
+
+<td class="center aligned">
+  <button class="ui icon negative button" (click)="delete_field('Are you sure to delete this field? ')">
+    <i class="trash icon"></i>
+  </button>
+</td>
+
+<ng-template let-context let-modal="modal" #modalTemplate>
+    <div class="content">
+        <h3>{{ context.data }}</h3>
+    </div>
+    <div class="actions">
+        <button class="ui red button" (click)="modal.deny('denied')">Cancel</button>
+        <button class="ui green button" (click)="modal.approve('approved')" autofocus>Yes</button>
+    </div>
+</ng-template>
+
+<ng-template let-context let-modal="modal" #modalTemplate2>
+    <div class="content">
+        <h3>{{ context.data }}</h3>
+    </div>
+    <div class="actions">
+        <button class="ui red button" (click)="modal.deny('denied')">Cancel</button>
+        <button class="ui green button" (click)="modal.approve('approved')" autofocus>Yes</button>
+    </div>
+</ng-template>
