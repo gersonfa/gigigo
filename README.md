@@ -8,5 +8,4 @@ This project was generated with Angular CLI version 6.0.8 and Semantic UI
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. 
 Don't forget run npm install!
-
-
+You must have installed Angular-CLI
